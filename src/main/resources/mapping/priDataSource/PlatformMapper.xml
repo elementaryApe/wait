@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdong.dao.priDataSource.PlatformMapper" >
+  <resultMap id="BaseResultMap" type="com.rongdong.model.priDataSource.Platform" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
+    <result column="online_time" property="onlineTime" jdbcType="DATE" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="registered_capital" property="registeredCapital" jdbcType="REAL" />
+    <result column="website" property="website" jdbcType="VARCHAR" />
+    <result column="slogan" property="slogan" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="secret" property="secret" jdbcType="VARCHAR" />
+    <result column="to_platform_url" property="toPlatformUrl" jdbcType="VARCHAR" />
+    <result column="collaborate" property="collaborate" jdbcType="INTEGER" />
+    <result column="contact_name" property="contactName" jdbcType="VARCHAR" />
+    <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="conditions" property="conditions" jdbcType="VARCHAR" />
+    <result column="informations" property="informations" jdbcType="VARCHAR" />
+    <result column="order_num" property="orderNum" jdbcType="INTEGER" />
+    <result column="grant_time" property="grantTime" jdbcType="INTEGER" />
+    <result column="apply_num" property="applyNum" jdbcType="INTEGER" />
+    <result column="success_rate" property="successRate" jdbcType="REAL" />
+    <result column="repayment_type" property="repaymentType" jdbcType="VARCHAR" />
+    <result column="loan_num_start" property="loanNumStart" jdbcType="INTEGER" />
+    <result column="loan_num_end" property="loanNumEnd" jdbcType="INTEGER" />
+    <result column="rate_start" property="rateStart" jdbcType="DECIMAL" />
+    <result column="rate_end" property="rateEnd" jdbcType="DECIMAL" />
+    <result column="credit_period_start" property="creditPeriodStart" jdbcType="INTEGER" />
+    <result column="credit_period_end" property="creditPeriodEnd" jdbcType="INTEGER" />
+    <result column="is_show" property="isShow" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_deleted" property="isDeleted" jdbcType="INTEGER" />
+    <result column="open_type" property="openType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, logo, platform_name, online_time, company, province, city, area, address, registered_capital, 
+    website, slogan, introduction, secret, to_platform_url, collaborate, contact_name, 
+    contact_phone, conditions, informations, order_num, grant_time, apply_num, success_rate, 
+    repayment_type, loan_num_start, loan_num_end, rate_start, rate_end, credit_period_start, 
+    credit_period_end, is_show, create_time, update_time, is_deleted, open_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from platform
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from platform
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.rongdong.model.priDataSource.Platform" >
+    insert into platform (id, logo, platform_name, 
+      online_time, company, province, 
+      city, area, address, 
+      registered_capital, website, slogan, 
+      introduction, secret, to_platform_url, 
+      collaborate, contact_name, contact_phone, 
+      conditions, informations, order_num, 
+      grant_time, apply_num, success_rate, 
+      repayment_type, loan_num_start, loan_num_end, 
+      rate_start, rate_end, credit_period_start, 
+      credit_period_end, is_show, create_time, 
+      update_time, is_deleted, open_type
+      )
+    values (#{id,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{platformName,jdbcType=VARCHAR}, 
+      #{onlineTime,jdbcType=DATE}, #{company,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{registeredCapital,jdbcType=REAL}, #{website,jdbcType=VARCHAR}, #{slogan,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=VARCHAR}, #{secret,jdbcType=VARCHAR}, #{toPlatformUrl,jdbcType=VARCHAR}, 
+      #{collaborate,jdbcType=INTEGER}, #{contactName,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, 
+      #{conditions,jdbcType=VARCHAR}, #{informations,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, 
+      #{grantTime,jdbcType=INTEGER}, #{applyNum,jdbcType=INTEGER}, #{successRate,jdbcType=REAL}, 
+      #{repaymentType,jdbcType=VARCHAR}, #{loanNumStart,jdbcType=INTEGER}, #{loanNumEnd,jdbcType=INTEGER}, 
+      #{rateStart,jdbcType=DECIMAL}, #{rateEnd,jdbcType=DECIMAL}, #{creditPeriodStart,jdbcType=INTEGER}, 
+      #{creditPeriodEnd,jdbcType=INTEGER}, #{isShow,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=INTEGER}, #{openType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongdong.model.priDataSource.Platform" >
+    insert into platform
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="logo != null" >
+        logo,
+      </if>
+      <if test="platformName != null" >
+        platform_name,
+      </if>
+      <if test="onlineTime != null" >
+        online_time,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="registeredCapital != null" >
+        registered_capital,
+      </if>
+      <if test="website != null" >
+        website,
+      </if>
+      <if test="slogan != null" >
+        slogan,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="secret != null" >
+        secret,
+      </if>
+      <if test="toPlatformUrl != null" >
+        to_platform_url,
+      </if>
+      <if test="collaborate != null" >
+        collaborate,
+      </if>
+      <if test="contactName != null" >
+        contact_name,
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone,
+      </if>
+      <if test="conditions != null" >
+        conditions,
+      </if>
+      <if test="informations != null" >
+        informations,
+      </if>
+      <if test="orderNum != null" >
+        order_num,
+      </if>
+      <if test="grantTime != null" >
+        grant_time,
+      </if>
+      <if test="applyNum != null" >
+        apply_num,
+      </if>
+      <if test="successRate != null" >
+        success_rate,
+      </if>
+      <if test="repaymentType != null" >
+        repayment_type,
+      </if>
+      <if test="loanNumStart != null" >
+        loan_num_start,
+      </if>
+      <if test="loanNumEnd != null" >
+        loan_num_end,
+      </if>
+      <if test="rateStart != null" >
+        rate_start,
+      </if>
+      <if test="rateEnd != null" >
+        rate_end,
+      </if>
+      <if test="creditPeriodStart != null" >
+        credit_period_start,
+      </if>
+      <if test="creditPeriodEnd != null" >
+        credit_period_end,
+      </if>
+      <if test="isShow != null" >
+        is_show,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="openType != null" >
+        open_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="platformName != null" >
+        #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineTime != null" >
+        #{onlineTime,jdbcType=DATE},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredCapital != null" >
+        #{registeredCapital,jdbcType=REAL},
+      </if>
+      <if test="website != null" >
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="slogan != null" >
+        #{slogan,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="secret != null" >
+        #{secret,jdbcType=VARCHAR},
+      </if>
+      <if test="toPlatformUrl != null" >
+        #{toPlatformUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="collaborate != null" >
+        #{collaborate,jdbcType=INTEGER},
+      </if>
+      <if test="contactName != null" >
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="conditions != null" >
+        #{conditions,jdbcType=VARCHAR},
+      </if>
+      <if test="informations != null" >
+        #{informations,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="grantTime != null" >
+        #{grantTime,jdbcType=INTEGER},
+      </if>
+      <if test="applyNum != null" >
+        #{applyNum,jdbcType=INTEGER},
+      </if>
+      <if test="successRate != null" >
+        #{successRate,jdbcType=REAL},
+      </if>
+      <if test="repaymentType != null" >
+        #{repaymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="loanNumStart != null" >
+        #{loanNumStart,jdbcType=INTEGER},
+      </if>
+      <if test="loanNumEnd != null" >
+        #{loanNumEnd,jdbcType=INTEGER},
+      </if>
+      <if test="rateStart != null" >
+        #{rateStart,jdbcType=DECIMAL},
+      </if>
+      <if test="rateEnd != null" >
+        #{rateEnd,jdbcType=DECIMAL},
+      </if>
+      <if test="creditPeriodStart != null" >
+        #{creditPeriodStart,jdbcType=INTEGER},
+      </if>
+      <if test="creditPeriodEnd != null" >
+        #{creditPeriodEnd,jdbcType=INTEGER},
+      </if>
+      <if test="isShow != null" >
+        #{isShow,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="openType != null" >
+        #{openType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongdong.model.priDataSource.Platform" >
+    update platform
+    <set >
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="platformName != null" >
+        platform_name = #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineTime != null" >
+        online_time = #{onlineTime,jdbcType=DATE},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredCapital != null" >
+        registered_capital = #{registeredCapital,jdbcType=REAL},
+      </if>
+      <if test="website != null" >
+        website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="slogan != null" >
+        slogan = #{slogan,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="secret != null" >
+        secret = #{secret,jdbcType=VARCHAR},
+      </if>
+      <if test="toPlatformUrl != null" >
+        to_platform_url = #{toPlatformUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="collaborate != null" >
+        collaborate = #{collaborate,jdbcType=INTEGER},
+      </if>
+      <if test="contactName != null" >
+        contact_name = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="conditions != null" >
+        conditions = #{conditions,jdbcType=VARCHAR},
+      </if>
+      <if test="informations != null" >
+        informations = #{informations,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="grantTime != null" >
+        grant_time = #{grantTime,jdbcType=INTEGER},
+      </if>
+      <if test="applyNum != null" >
+        apply_num = #{applyNum,jdbcType=INTEGER},
+      </if>
+      <if test="successRate != null" >
+        success_rate = #{successRate,jdbcType=REAL},
+      </if>
+      <if test="repaymentType != null" >
+        repayment_type = #{repaymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="loanNumStart != null" >
+        loan_num_start = #{loanNumStart,jdbcType=INTEGER},
+      </if>
+      <if test="loanNumEnd != null" >
+        loan_num_end = #{loanNumEnd,jdbcType=INTEGER},
+      </if>
+      <if test="rateStart != null" >
+        rate_start = #{rateStart,jdbcType=DECIMAL},
+      </if>
+      <if test="rateEnd != null" >
+        rate_end = #{rateEnd,jdbcType=DECIMAL},
+      </if>
+      <if test="creditPeriodStart != null" >
+        credit_period_start = #{creditPeriodStart,jdbcType=INTEGER},
+      </if>
+      <if test="creditPeriodEnd != null" >
+        credit_period_end = #{creditPeriodEnd,jdbcType=INTEGER},
+      </if>
+      <if test="isShow != null" >
+        is_show = #{isShow,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="openType != null" >
+        open_type = #{openType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongdong.model.priDataSource.Platform" >
+    update platform
+    set logo = #{logo,jdbcType=VARCHAR},
+      platform_name = #{platformName,jdbcType=VARCHAR},
+      online_time = #{onlineTime,jdbcType=DATE},
+      company = #{company,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      registered_capital = #{registeredCapital,jdbcType=REAL},
+      website = #{website,jdbcType=VARCHAR},
+      slogan = #{slogan,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      secret = #{secret,jdbcType=VARCHAR},
+      to_platform_url = #{toPlatformUrl,jdbcType=VARCHAR},
+      collaborate = #{collaborate,jdbcType=INTEGER},
+      contact_name = #{contactName,jdbcType=VARCHAR},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      conditions = #{conditions,jdbcType=VARCHAR},
+      informations = #{informations,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      grant_time = #{grantTime,jdbcType=INTEGER},
+      apply_num = #{applyNum,jdbcType=INTEGER},
+      success_rate = #{successRate,jdbcType=REAL},
+      repayment_type = #{repaymentType,jdbcType=VARCHAR},
+      loan_num_start = #{loanNumStart,jdbcType=INTEGER},
+      loan_num_end = #{loanNumEnd,jdbcType=INTEGER},
+      rate_start = #{rateStart,jdbcType=DECIMAL},
+      rate_end = #{rateEnd,jdbcType=DECIMAL},
+      credit_period_start = #{creditPeriodStart,jdbcType=INTEGER},
+      credit_period_end = #{creditPeriodEnd,jdbcType=INTEGER},
+      is_show = #{isShow,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      open_type = #{openType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

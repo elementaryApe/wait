@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdong.dao.priDataSource.ChannelUserMapper" >
+  <resultMap id="BaseResultMap" type="com.rongdong.model.priDataSource.ChannelUser" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="data_type" property="dataType" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, channel_id, user_id, data_type, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from channel_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getChannelUserList" parameterType="com.rongdong.vo.ChannelUserVo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from channel_user
+    <where>
+      <if test="id !=null and id!=''">
+        and id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="channelId !=null and channelId!=''">
+        and channel_id = #{channelId,jdbcType=VARCHAR}
+      </if>
+      <if test="userId !=null and userId!=''">
+        and user_id = #{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="dataType !=null ">
+        and data_type = #{dataType,jdbcType=INTEGER}
+      </if>
+      <if test="queryDate !=null and queryDate !=''">
+        and DATE_FORMAT(create_time,'%Y-%m-%d')=STR_TO_DATE(#{queryDate,jdbcType=VARCHAR},'%Y-%m-%d')
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from channel_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.rongdong.model.priDataSource.ChannelUser" >
+    insert into channel_user (id, channel_id, user_id, 
+      data_type, create_time)
+    values (#{id,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{dataType,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongdong.model.priDataSource.ChannelUser" >
+    insert into channel_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="dataType != null" >
+        data_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createTime == null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null" >
+        #{dataType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime == null" >
+        SYSDATE(),
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongdong.model.priDataSource.ChannelUser" >
+    update channel_user
+    <set >
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null" >
+        data_type = #{dataType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongdong.model.priDataSource.ChannelUser" >
+    update channel_user
+    set channel_id = #{channelId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      data_type = #{dataType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

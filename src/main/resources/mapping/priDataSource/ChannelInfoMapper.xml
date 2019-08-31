@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdong.dao.priDataSource.ChannelInfoMapper">
+    <resultMap id="BaseResultMap" type="com.rongdong.model.priDataSource.ChannelInfo">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="channel_code" property="channelCode" jdbcType="VARCHAR"/>
+        <result column="channel_name" property="channelName" jdbcType="VARCHAR"/>
+        <result column="channel_pwd" property="channelPwd" jdbcType="VARCHAR"/>
+        <result column="contacts" property="contacts" jdbcType="VARCHAR"/>
+        <result column="contacts_phone" property="contactsPhone" jdbcType="VARCHAR"/>
+        <result column="salesman" property="salesman" jdbcType="VARCHAR"/>
+        <result column="user_count" property="userCount" jdbcType="VARCHAR"/>
+        <result column="balance" property="balance" jdbcType="VARCHAR"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, channel_code, channel_name, channel_pwd, contacts, contacts_phone, salesman, 
+    user_count, balance, create_user, create_time, update_user, update_time, is_deleted,status
+  </sql>
+    <sql id="base_Query">
+        <where>
+            is_deleted = 0
+            <if test="id != null ">
+                AND id = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="channelCode != null ">
+                AND channel_code = #{channelCode,jdbcType=VARCHAR}
+            </if>
+            <if test="salesman != null and salesman !=''">
+                AND salesman = #{salesman,jdbcType=VARCHAR}
+            </if>
+            <if test="channelName != null and channelName !=''">
+                AND channel_name = #{channelName,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                AND status = #{status,jdbcType=INTEGER}
+            </if>
+        </where>
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from channel_new
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getChannelList" parameterType="com.rongdong.model.priDataSource.ChannelInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from channel_new
+        <include refid="base_Query"/>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from channel_new
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.rongdong.model.priDataSource.ChannelInfo">
+    insert into channel_new (id, channel_code, channel_name, 
+      channel_pwd, contacts, contacts_phone, 
+      salesman, user_count, balance, 
+      create_user, create_time, update_user, 
+      update_time, is_deleted,status)
+    values (#{id,jdbcType=VARCHAR}, #{channelCode,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR}, 
+      #{channelPwd,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, #{contactsPhone,jdbcType=VARCHAR}, 
+      #{salesman,jdbcType=VARCHAR}, #{userCount,jdbcType=VARCHAR}, #{balance,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.rongdong.model.priDataSource.ChannelInfo">
+        insert into channel_new
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="channelCode != null">
+                channel_code,
+            </if>
+            <if test="channelName != null">
+                channel_name,
+            </if>
+            <if test="channelPwd != null">
+                channel_pwd,
+            </if>
+            <if test="contacts != null">
+                contacts,
+            </if>
+            <if test="contactsPhone != null">
+                contacts_phone,
+            </if>
+            <if test="salesman != null">
+                salesman,
+            </if>
+            <if test="userCount != null">
+                user_count,
+            </if>
+            <if test="balance != null">
+                balance,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="channelCode != null">
+                #{channelCode,jdbcType=VARCHAR},
+            </if>
+            <if test="channelName != null">
+                #{channelName,jdbcType=VARCHAR},
+            </if>
+            <if test="channelPwd != null">
+                #{channelPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="contacts != null">
+                #{contacts,jdbcType=VARCHAR},
+            </if>
+            <if test="contactsPhone != null">
+                #{contactsPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="salesman != null">
+                #{salesman,jdbcType=VARCHAR},
+            </if>
+            <if test="userCount != null">
+                #{userCount,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null">
+                #{balance,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.rongdong.model.priDataSource.ChannelInfo">
+        update channel_new
+        <set>
+            <if test="channelCode != null">
+                channel_code = #{channelCode,jdbcType=VARCHAR},
+            </if>
+            <if test="channelName != null">
+                channel_name = #{channelName,jdbcType=VARCHAR},
+            </if>
+            <if test="channelPwd != null">
+                channel_pwd = #{channelPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="contacts != null">
+                contacts = #{contacts,jdbcType=VARCHAR},
+            </if>
+            <if test="contactsPhone != null">
+                contacts_phone = #{contactsPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="salesman != null">
+                salesman = #{salesman,jdbcType=VARCHAR},
+            </if>
+            <if test="userCount != null">
+                user_count = #{userCount,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null">
+                balance = #{balance,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime == null">
+                update_time = SYSDATE(),
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.rongdong.model.priDataSource.ChannelInfo">
+    update channel_new
+    set channel_code = #{channelCode,jdbcType=VARCHAR},
+      channel_name = #{channelName,jdbcType=VARCHAR},
+      channel_pwd = #{channelPwd,jdbcType=VARCHAR},
+      contacts = #{contacts,jdbcType=VARCHAR},
+      contacts_phone = #{contactsPhone,jdbcType=VARCHAR},
+      salesman = #{salesman,jdbcType=VARCHAR},
+      user_count = #{userCount,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

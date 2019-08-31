@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdong.dao.priDataSource.PropertyMapper" >
+  <resultMap id="BaseResultMap" type="com.rongdong.model.priDataSource.Property" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="has_credit_card" property="hasCreditCard" jdbcType="INTEGER" />
+    <result column="house" property="house" jdbcType="VARCHAR" />
+    <result column="car" property="car" jdbcType="VARCHAR" />
+    <result column="has_success_loan" property="hasSuccessLoan" jdbcType="INTEGER" />
+    <result column="credit" property="credit" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_deleted" property="isDeleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, has_credit_card, house, car, has_success_loan, credit, create_time, 
+    update_time, is_deleted
+  </sql>
+
+
+  <sql id="Query_Property_Where">
+    <where>
+      is_deleted = 0
+      <if test="userId != null and userId != ''">
+        AND user_id = #{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="hasCreditCard != null">
+        AND has_credit_card = #{hasCreditCard,jdbcType=INTEGER}
+      </if>
+      <if test="house != null and house != ''">
+        AND house = #{house,jdbcType=VARCHAR}
+      </if>
+      <if test="car != null and car != ''">
+        AND car = #{car,jdbcType=VARCHAR}
+      </if>
+      <if test="hasSuccessLoan != null">
+        AND has_success_loan = #{hasSuccessLoan,jdbcType=INTEGER}
+      </if>
+      <if test="credit != null and credit != ''">
+        AND credit = #{credit,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+
+  <select id="findPropertyList" parameterType="com.rongdong.model.priDataSource.Property" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM property
+    <include refid="Query_Property_Where"/>
+    ORDER BY create_time DESC
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from property
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from property
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.rongdong.model.priDataSource.Property" >
+    insert into property (id, user_id, has_credit_card, 
+      house, car, has_success_loan, 
+      credit, create_time, update_time, 
+      is_deleted)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{hasCreditCard,jdbcType=INTEGER}, 
+      #{house,jdbcType=VARCHAR}, #{car,jdbcType=VARCHAR}, #{hasSuccessLoan,jdbcType=INTEGER}, 
+      #{credit,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{isDeleted,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongdong.model.priDataSource.Property" >
+    insert into property
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="hasCreditCard != null" >
+        has_credit_card,
+      </if>
+      <if test="house != null" >
+        house,
+      </if>
+      <if test="car != null" >
+        car,
+      </if>
+      <if test="hasSuccessLoan != null" >
+        has_success_loan,
+      </if>
+      <if test="credit != null" >
+        credit,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="hasCreditCard != null" >
+        #{hasCreditCard,jdbcType=INTEGER},
+      </if>
+      <if test="house != null" >
+        #{house,jdbcType=VARCHAR},
+      </if>
+      <if test="car != null" >
+        #{car,jdbcType=VARCHAR},
+      </if>
+      <if test="hasSuccessLoan != null" >
+        #{hasSuccessLoan,jdbcType=INTEGER},
+      </if>
+      <if test="credit != null" >
+        #{credit,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongdong.model.priDataSource.Property" >
+    update property
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="hasCreditCard != null" >
+        has_credit_card = #{hasCreditCard,jdbcType=INTEGER},
+      </if>
+      <if test="house != null" >
+        house = #{house,jdbcType=VARCHAR},
+      </if>
+      <if test="car != null" >
+        car = #{car,jdbcType=VARCHAR},
+      </if>
+      <if test="hasSuccessLoan != null" >
+        has_success_loan = #{hasSuccessLoan,jdbcType=INTEGER},
+      </if>
+      <if test="credit != null" >
+        credit = #{credit,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rongdong.model.priDataSource.Property" >
+    update property
+    set user_id = #{userId,jdbcType=VARCHAR},
+      has_credit_card = #{hasCreditCard,jdbcType=INTEGER},
+      house = #{house,jdbcType=VARCHAR},
+      car = #{car,jdbcType=VARCHAR},
+      has_success_loan = #{hasSuccessLoan,jdbcType=INTEGER},
+      credit = #{credit,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

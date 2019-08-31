@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdong.dao.priDataSource.ChannelRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.rongdong.model.priDataSource.ChannelRole" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="getChannelRoleList" parameterType="com.rongdong.model.priDataSource.ChannelRole" resultMap="BaseResultMap">
+    SELECT id,role,channel_id
+    FROM channel_role
+    <where>
+      <if test="id !=null and id!= ''">
+        and id=#{id,jdbcType=VARCHAR}
+      </if>
+      <if test="role !=null and role!= ''">
+        and role=#{role,jdbcType=VARCHAR}
+      </if>
+      <if test="channelId !=null and channelId!= ''">
+        and channel_id=#{channelId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.rongdong.model.priDataSource.ChannelRole" >
+    insert into channel_role (id, role, channel_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rongdong.model.priDataSource.ChannelRole" >
+    insert into channel_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongdong.dao.priDataSource.ChannelRecordMapper">
+    <resultMap id="BaseResultMap" type="com.rongdong.model.priDataSource.ChannelRecord">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="channel_id" property="channelId" jdbcType="VARCHAR"/>
+        <result column="balance" property="balance" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, channel_id, balance, create_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from channel_record
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="getChannelRecord" resultMap="BaseResultMap"
+            parameterType="com.rongdong.vo.ChannelRecordVo">
+        select
+        <include refid="Base_Column_List"/>
+        from channel_record
+        <where>
+            <if test="id !=null and id !=''">
+                and id=#{id,jdbcType=VARCHAR}
+            </if>
+            <if test="channelId !=null and channelId !=''">
+                and channel_id=#{channelId,jdbcType=VARCHAR}
+            </if>
+            <if test="queryDate !=null and queryDate !=''">
+                and DATE_FORMAT(create_time,'%Y-%m-%d')=STR_TO_DATE(#{queryDate,jdbcType=VARCHAR},'%Y-%m-%d')
+            </if>
+        </where>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from channel_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.rongdong.model.priDataSource.ChannelRecord">
+    insert into channel_record (id, channel_id, balance, 
+      create_time)
+    values (#{id,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, #{balance,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.rongdong.model.priDataSource.ChannelRecord">
+        insert into channel_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="channelId != null">
+                channel_id,
+            </if>
+            <if test="balance != null">
+                balance,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createTime == null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="channelId != null">
+                #{channelId,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null">
+                #{balance,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime == null">
+                SYSDATE(),
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.rongdong.model.priDataSource.ChannelRecord">
+        update channel_record
+        <set>
+            <if test="channelId != null">
+                channel_id = #{channelId,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null">
+                balance = #{balance,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.rongdong.model.priDataSource.ChannelRecord">
+    update channel_record
+    set channel_id = #{channelId,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
